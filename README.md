@@ -1,4 +1,5 @@
 # 🚗 Car & Pedestrian Detection using YOLOv8
+This project implements a deep learning-based object detection system capable of detecting cars and pedestrians in images using the YOLOv8 (You Only Look Once) architecture.
 
 <p align="center">
 <img src="https://img.shields.io/badge/Python-3.9-blue">
