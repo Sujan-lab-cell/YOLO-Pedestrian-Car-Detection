@@ -176,7 +176,7 @@ The graphs stabilized after **25–30 epochs**, indicating that the model learne
 ### Training Graphs
 
 <p align="center">
-<img src="results/training_results.png" width="900">
+<img src="result/training_results.png" width="900">
 </p>
 
 ---
@@ -201,7 +201,7 @@ These results indicate that the model performs **reliably with balanced precisio
 The confusion matrix shows the model’s performance in classifying cars and pedestrians.
 
 <p align="center">
-<img src="results/confusion_matrix.png" width="600">
+<img src="result/confusion_matrix.png" width="600">
 </p>
 
 Observations:
@@ -215,7 +215,7 @@ Observations:
 # 📉 Precision-Recall Curve
 
 <p align="center">
-<img src="results/pr_curve.png" width="600">
+<img src="result/pr_curve.png" width="600">
 </p>
 
 Key insights:
@@ -237,7 +237,7 @@ Confidence Threshold = 0.389
 ```
 
 <p align="center">
-<img src="results/f1_curve.png" width="600">
+<img src="result/f1_curve.png" width="600">
 </p>
 
 ---
@@ -247,12 +247,12 @@ Confidence Threshold = 0.389
 Below are some example detection outputs from the trained model.
 
 <p align="center">
-<img src="results/detection1.png" width="400">
-<img src="results/detection2.png" width="400">
+<img src="result/detection1.png" width="400">
+<img src="result/detection2.png" width="400">
 </p>
 
 <p align="center">
-<img src="results/detection3.png" width="400">
+<img src="result/detection3.png" width="400">
 </p>
 
 The model can detect **multiple objects in the same scene** with accurate bounding boxes.
@@ -270,8 +270,8 @@ Observations:
 * Good generalization to new images
 
 <p align="center">
-<img src="results/realworld1.png" width="400">
-<img src="results/realworld2.png" width="400">
+<img src="result/realworld1.png" width="400">
+<img src="result/realworld2.png" width="400">
 </p>
 
 ---
@@ -285,25 +285,25 @@ These failure cases help understand where the model struggles and how it can be 
 ### 1️⃣ False Negatives (Missed Detections)
 
 <p align="center">
-<img src="results/failure_false_negative.png" width="500">
+<img src="result/failure_false_negative.png" width="500">
 </p>
 
 ### 2️⃣ False Positives
 
 <p align="center">
-<img src="results/failure_false_positive.png" width="500">
+<img src="result/failure_false_positive.png" width="500">
 </p>
 
 ### 3️⃣ Crowded Scenes / Occlusion
 
 <p align="center">
-<img src="results/failure_occlusion.png" width="500">
+<img src="result/failure_occlusion.png" width="500">
 </p>
 
 ### 4️⃣ Small Object Detection Issues
 
 <p align="center">
-<img src="results/failure_small_objects.png" width="500">
+<img src="result/failure_small_objects.png" width="500">
 </p>
 
 ---
