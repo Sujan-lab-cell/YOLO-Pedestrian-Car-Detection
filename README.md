@@ -201,7 +201,7 @@ These results indicate that the model performs **reliably with balanced precisio
 The confusion matrix shows the model’s performance in classifying cars and pedestrians.
 
 <p align="center">
-<img src="result/confusion_matrix.png" width="600">
+<img src="result/confusion_matrix2.png" width="600">
 </p>
 
 Observations:
