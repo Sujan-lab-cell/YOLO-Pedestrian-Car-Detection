@@ -48,11 +48,6 @@ Object detection models like YOLO are widely used in:
 
 This project demonstrates how deep learning can be applied to detect multiple objects in real-world scenes efficiently.
 
-### Download Dataset
-
-You can download the dataset from Roboflow:
-
-https://app.roboflow.com/ds/NGlYq7rAEL?key=Nq5fglR2MZ
 
 ---
 
@@ -69,6 +64,11 @@ The primary objectives of this project are:
 ---
 
 # 📂 Dataset Description
+### Download Dataset
+
+You can download the dataset from Roboflow:
+
+https://app.roboflow.com/ds/NGlYq7rAEL?key=Nq5fglR2MZ
 
 A custom dataset containing images of **cars and pedestrians** was prepared using filtered images from publicly available datasets.
 
