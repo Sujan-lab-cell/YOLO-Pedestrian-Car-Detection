@@ -8,6 +8,7 @@
 </p>
 
 ---
+
 ## 📑 Table of Contents
 
 * [Project Overview](#-project-overview)
@@ -28,6 +29,7 @@
 * [Possible Improvements](#-possible-improvements)
 * [Conclusion](#-conclusion)
 * [Author](#-author)
+
 ---
 
 # 📌 Project Overview
@@ -173,13 +175,9 @@ The graphs stabilized after **25–30 epochs**, indicating that the model learne
 
 ### Training Graphs
 
-(Add images here)
-
-```
-results/train_loss.png
-results/precision_curve.png
-results/map_curve.png
-```
+<p align="center">
+<img src="results/training_results.png" width="900">
+</p>
 
 ---
 
@@ -202,11 +200,9 @@ These results indicate that the model performs **reliably with balanced precisio
 
 The confusion matrix shows the model’s performance in classifying cars and pedestrians.
 
-(Add confusion matrix image)
-
-```
-results/confusion_matrix.png
-```
+<p align="center">
+<img src="results/confusion_matrix.png" width="600">
+</p>
 
 Observations:
 
@@ -218,13 +214,9 @@ Observations:
 
 # 📉 Precision-Recall Curve
 
-The Precision-Recall curve demonstrates the trade-off between precision and recall.
-
-(Add PR curve image)
-
-```
-results/pr_curve.png
-```
+<p align="center">
+<img src="results/pr_curve.png" width="600">
+</p>
 
 Key insights:
 
@@ -244,9 +236,9 @@ F1 Score = 0.76
 Confidence Threshold = 0.389
 ```
 
-This threshold provides the **best balance between detection accuracy and false detections**.
-
-(Add F1 curve image)
+<p align="center">
+<img src="results/f1_curve.png" width="600">
+</p>
 
 ---
 
@@ -254,13 +246,14 @@ This threshold provides the **best balance between detection accuracy and false 
 
 Below are some example detection outputs from the trained model.
 
-(Add your detection result images here)
+<p align="center">
+<img src="results/detection1.png" width="400">
+<img src="results/detection2.png" width="400">
+</p>
 
-```
-results/detection1.png
-results/detection2.png
-results/detection3.png
-```
+<p align="center">
+<img src="results/detection3.png" width="400">
+</p>
 
 The model can detect **multiple objects in the same scene** with accurate bounding boxes.
 
@@ -276,122 +269,45 @@ Observations:
 * Ability to detect multiple cars and pedestrians
 * Good generalization to new images
 
-(Add real world test images)
+<p align="center">
+<img src="results/realworld1.png" width="400">
+<img src="results/realworld2.png" width="400">
+</p>
 
 ---
+
 ## ⚠️ Failure Cases and Limitations
 
 Although the YOLOv8 model performs well in most situations, some limitations were observed during testing on real-world images.
 
 These failure cases help understand where the model struggles and how it can be improved.
 
----
-
 ### 1️⃣ False Negatives (Missed Detections)
-
-In some images, objects that were present were **not detected by the model**.
-
-Common reasons:
-
-* Objects are **too small or far away**
-* Objects are **partially occluded**
-* Low image resolution
-
-Example:
 
 <p align="center">
 <img src="results/failure_false_negative.png" width="500">
 </p>
 
-#### Possible Solutions
-
-* Increase dataset size with **more small-object examples**
-* Train using **higher resolution images**
-* Use a **larger YOLO model (YOLOv8s or YOLOv8m)**
-* Apply **multi-scale training**
-
----
-
 ### 2️⃣ False Positives
-
-Sometimes the model detects an object **where no actual object exists**.
-
-Example:
 
 <p align="center">
 <img src="results/failure_false_positive.png" width="500">
 </p>
 
-Common reasons:
-
-* Background patterns resemble objects
-* Insufficient training examples
-* Visual similarity with other objects
-
-#### Possible Solutions
-
-* Add **more diverse background images**
-* Improve annotation quality
-* Increase dataset diversity
-* Adjust **confidence threshold**
-
----
-
 ### 3️⃣ Crowded Scenes / Occlusion
-
-When many objects appear close together, the model may produce **overlapping or incorrect bounding boxes**.
-
-Example:
 
 <p align="center">
 <img src="results/failure_occlusion.png" width="500">
 </p>
 
-Common reasons:
-
-* Heavy occlusion between objects
-* Complex scenes with many objects
-* Overlapping bounding boxes
-
-#### Possible Solutions
-
-* Add more **crowded-scene images to training data**
-* Train with **larger datasets**
-* Use **YOLOv8m or YOLOv8l for better feature extraction**
-* Apply **better Non-Maximum Suppression (NMS) tuning**
-
----
-
 ### 4️⃣ Small Object Detection Issues
-
-The model sometimes struggles to detect **very small cars or pedestrians**.
-
-Example:
 
 <p align="center">
 <img src="results/failure_small_objects.png" width="500">
 </p>
 
-#### Possible Solutions
-
-* Train with **higher input resolution (e.g., 1280×1280)**
-* Increase dataset examples of **small objects**
-* Use **feature pyramid improvements in larger YOLO models**
-
 ---
 
-## 📌 Summary of Improvements
-
-To improve model performance further:
-
-* Increase dataset size
-* Improve annotation quality
-* Train larger YOLO models
-* Use higher image resolution
-* Add more complex real-world scenes
-
-These improvements can significantly enhance detection accuracy in challenging environments.
----
 # 🚀 Improvements Attempted
 
 Several techniques were applied to improve performance:
