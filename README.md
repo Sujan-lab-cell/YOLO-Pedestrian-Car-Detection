@@ -1,10 +1,10 @@
-# 🌍 GeoSentinel AI: Smart Landslide Detection System
+# 🚗 Car & Pedestrian Detection using YOLOv8
 
 <p align="center">
 <img src="https://img.shields.io/badge/Python-3.9-blue">
 <img src="https://img.shields.io/badge/Framework-YOLOv8-green">
-<img src="https://img.shields.io/badge/UI-Streamlit-orange">
-<img src="https://img.shields.io/badge/Task-Landslide%20Detection-red">
+<img src="https://img.shields.io/badge/Task-Object%20Detection-orange">
+<img src="https://img.shields.io/badge/Classes-Car%20%7C%20Pedestrian-red">
 </p>
 
 ---
@@ -34,101 +34,150 @@
 
 # 📌 Project Overview
 
-This project presents **GeoSentinel AI**, a deep learning-based system designed to detect **landslides** using the YOLOv8 segmentation model.
+This project implements a **deep learning-based object detection system** capable of detecting **cars and pedestrians** in images using the YOLOv8 (You Only Look Once) architecture.
 
-The system also includes:
+The model was trained on a **custom dataset containing annotated images of cars and pedestrians**. The goal of this project is to develop a robust object detection system and evaluate its performance using standard metrics such as **Precision, Recall, and Mean Average Precision (mAP)**.
 
-* 📍 Map visualization (Folium)
-* 📩 Alerts (SMS via Twilio, Email via SendGrid)
-* 🎥 Video frame analysis
-* 🔊 Voice alerts
+Object detection models like YOLO are widely used in:
 
-Applications:
+* Autonomous vehicles
+* Smart traffic monitoring
+* Surveillance systems
+* Pedestrian safety systems
+* Intelligent transportation systems
 
-* Disaster management  
-* Early warning systems  
-* Environmental monitoring  
+This project demonstrates how deep learning can be applied to detect multiple objects in real-world scenes efficiently.
+
 
 ---
 
 # 🎯 Objectives
 
-* Build landslide dataset  
-* Train YOLOv8 segmentation model  
-* Detect landslides in real-time  
-* Send alerts to authorities  
-* Analyze performance  
+The primary objectives of this project are:
+
+* Create a dataset containing **cars and pedestrians**
+* Annotate the dataset in **YOLO object detection format**
+* Train a **YOLOv8 object detection model**
+* Evaluate the trained model using performance metrics
+* Analyze **failure cases and model limitations**
 
 ---
 
 # 📂 Dataset Description
+### Download Dataset
 
-Dataset includes:
+You can download the dataset from Roboflow:
 
-* Satellite images  
-* Drone footage  
-* Terrain images  
+https://app.roboflow.com/ds/NGlYq7rAEL?key=Nq5fglR2MZ
 
-### Dataset Characteristics
+A custom dataset containing images of **cars and pedestrians** was prepared using filtered images from publicly available datasets.
 
-* Polygon mask annotations  
-* Multi-environment coverage  
-* Landslide & non-landslide data  
+### Dataset Statistics
+
+| Dataset Split           | Images  |
+| ----------------------- | ------- |
+| Training (70%)          | 656     |
+| Validation (20%)        | 183     |
+| Testing (10%)           | 92      |
+| **Total Source Images** | **931** |
+
+Number of classes:
+
+```
+0 → Car
+1 → Pedestrian
+```
+
+Many images contain **both cars and pedestrians**, allowing the model to learn **multi-class object detection in complex scenes**.
 
 ---
 
 # 🏷️ Data Annotation
 
-YOLO segmentation format using polygon masks for accurate region detection.
+The dataset was annotated using a **YOLO compatible annotation format**.
+
+Each object instance is represented by:
+
+```
+(class_id, x_center, y_center, width, height)
+```
+
+Where:
+
+| Parameter | Description         |
+| --------- | ------------------- |
+| class_id  | Object class label  |
+| x_center  | Center X coordinate |
+| y_center  | Center Y coordinate |
+| width     | Bounding box width  |
+| height    | Bounding box height |
+
+All coordinates are **normalized relative to image width and height**.
 
 ---
 
 # 🔧 Data Preprocessing & Augmentation
 
+Before training the model, preprocessing steps were applied to standardize the dataset.
+
 ### Preprocessing
 
-* Image resizing (640×640)  
-* Auto-orientation  
+* Auto-orientation to correct image rotation
+* Image resizing to **640 × 640 pixels**
 
-### Augmentation
+### Data Augmentation
 
-* Flipping  
-* Rotation  
-* Brightness changes  
-* Mosaic  
+To improve model generalization and prevent overfitting:
+
+* Brightness adjustment (-10% to +10%)
+* Gaussian blur (up to 1.2px)
+* 3× dataset augmentation
+
+### Dataset Size After Augmentation
+
+| Dataset          | Images   |
+| ---------------- | -------- |
+| Training         | 1964     |
+| Validation       | 183      |
+| Testing          | 92       |
+| **Total Images** | **2239** |
 
 ---
 
 # 🧠 Model Architecture
 
-Model: **YOLOv8 Segmentation (YOLOv8-Seg)**
+The model used in this project is **YOLOv8n (Nano version)**.
 
-Advantages:
+Reasons for choosing YOLOv8n:
 
-* Fast  
-* Accurate  
-* Real-time capable  
+* Lightweight architecture
+* Fast inference
+* Suitable for real-time detection
 
----
+### Training Parameters
 
-# ⚙️ Training Configuration
+| Parameter      | Value                   |
+| -------------- | ----------------------- |
+| Model          | YOLOv8n                 |
+| Image Size     | 640 × 640               |
+| Epochs         | 100                     |
+| Batch Size     | 8                       |
+| Early Stopping | Enabled (patience = 10) |
 
-| Parameter      | Value          |
-| -------------- | -------------- |
-| Model          | YOLOv8-Seg     |
-| Image Size     | 640 × 640      |
-| Epochs         | 100            |
-| Batch Size     | 8              |
-| IoU Threshold  | 0.45           |
-| Confidence     | 0.50           |
+Early stopping was used to prevent **overfitting during training**.
 
 ---
 
 # 📊 Training Performance
 
-* Loss decreased steadily  
-* mAP improved  
-* Stable convergence  
+During training:
+
+* Training loss gradually decreased
+* Validation loss stabilized
+* Precision and Recall improved steadily
+* mAP values increased as training progressed
+
+The graphs stabilized after **25–30 epochs**, indicating that the model learned important features successfully.
 
 ### Training Graphs
 
@@ -140,24 +189,32 @@ Advantages:
 
 # 📈 Model Performance Metrics
 
-| Metric  | Value |
-| ------- | ----- |
-| Precision | High |
-| Recall    | High |
-| mAP       | Good |
+The model was evaluated using standard object detection metrics.
+
+| Metric       | Value     |
+| ------------ | --------- |
+| Precision    | **0.777** |
+| Recall       | **0.751** |
+| mAP@0.5      | **0.769** |
+| mAP@0.5:0.95 | **0.556** |
+
+These results indicate that the model performs **reliably with balanced precision and recall values**.
 
 ---
 
 # 📊 Confusion Matrix
 
+The confusion matrix shows the model’s performance in classifying cars and pedestrians.
+
 <p align="center">
-<img src="result/confusion_matrix.png" width="600">
+<img src="result/confusion_matrix2.png" width="600">
 </p>
 
 Observations:
 
-* Accurate detection  
-* Minor errors in small regions  
+* Most **cars and pedestrians were correctly detected**
+* Pedestrian detection performed slightly better
+* Some objects were missed due to **small size or occlusion**
 
 ---
 
@@ -167,11 +224,23 @@ Observations:
 <img src="result/pr_curve.png" width="600">
 </p>
 
-Balanced precision and recall.
+Key insights:
+
+* Precision = **0.777**
+* Recall = **0.751**
+
+The balanced values indicate that the model avoids **too many false positives or missed detections**.
 
 ---
 
 # 📊 F1 Score Analysis
+
+The highest F1 score achieved was:
+
+```
+F1 Score = 0.76
+Confidence Threshold = 0.389
+```
 
 <p align="center">
 <img src="result/f1_curve.png" width="600">
@@ -180,6 +249,8 @@ Balanced precision and recall.
 ---
 
 # 🖼 Detection Results
+
+Below are some example detection outputs from the trained model.
 
 <p align="center">
 <img src="result/detection1.png" width="400">
@@ -190,25 +261,34 @@ Balanced precision and recall.
 <img src="result/detection3.png" width="400">
 </p>
 
+The model can detect **multiple objects in the same scene** with accurate bounding boxes.
+
 ---
 
 # 🌍 Real-World Image Evaluation
+
+The trained model was tested on **unseen real-world images**.
+
+Observations:
+
+* Accurate detection in well-lit scenes
+* Ability to detect multiple cars and pedestrians
+* Good generalization to new images
 
 <p align="center">
 <img src="result/realworld1.png" width="400">
 <img src="result/realworld2.png" width="400">
 </p>
 
-Observations:
-
-* Works in real-world conditions  
-* Good generalization  
-
 ---
 
 ## ⚠️ Failure Cases and Limitations
 
-### 1️⃣ False Negatives
+Although the YOLOv8 model performs well in most situations, some limitations were observed during testing on real-world images.
+
+These failure cases help understand where the model struggles and how it can be improved.
+
+### 1️⃣ False Negatives (Missed Detections)
 
 <p align="center">
 <img src="result/failure_false_negative.png" width="500">
@@ -220,13 +300,13 @@ Observations:
 <img src="result/failure_false_positive.png" width="500">
 </p>
 
-### 3️⃣ Occlusion
+### 3️⃣ Crowded Scenes / Occlusion
 
 <p align="center">
 <img src="result/failure_occlusion.png" width="500">
 </p>
 
-### 4️⃣ Small Objects
+### 4️⃣ Small Object Detection Issues
 
 <p align="center">
 <img src="result/failure_small_objects.png" width="500">
@@ -234,25 +314,37 @@ Observations:
 
 ---
 
-# 🚀 Possible Improvements
+# 🚀 Improvements Attempted
 
-* ISRO satellite integration  
-* Cloud deployment (AWS/GCP)  
-* IoT rainfall sensors  
-* GPS metadata extraction  
-* Multi-user alerts  
+Several techniques were applied to improve performance:
+
+* Data augmentation (brightness + blur)
+* Increased dataset size using augmentation
+* Image preprocessing and resizing
+* Early stopping to prevent overfitting
+* Confidence threshold tuning using F1 curve
+* Correction of annotation inconsistencies
 
 ---
 
 # ✅ Conclusion
 
-GeoSentinel demonstrates how AI can be used for real-time landslide detection.
+In this project, a **YOLOv8-based object detection model** was successfully trained to detect **cars and pedestrians** using a custom annotated dataset.
 
-✔ Accurate detection  
-✔ Real-time alerts  
-✔ Scalable system  
+Key achievements:
 
-Helps reduce disaster impact and improve safety.
+* Achieved **mAP@0.5 = 0.769**
+* Balanced **precision and recall**
+* Stable training and good generalization
+* Reliable detection performance in real-world scenarios
+
+Although the model performs well, future improvements could focus on:
+
+* Detecting smaller and occluded objects
+* Increasing dataset diversity
+* Training larger YOLO models
+
+Overall, this project demonstrates the effectiveness of **YOLO-based object detection systems for real-world applications**.
 
 ---
 
@@ -260,7 +352,7 @@ Helps reduce disaster impact and improve safety.
 
 **Sujan KS**
 
-Artificial Intelligence & Machine Learning  
-Deep Learning & Computer Vision Enthusiast  
+Artificial Intelligence & Machine Learning
+Deep Learning & Computer Vision Enthusiast
 
 ---
