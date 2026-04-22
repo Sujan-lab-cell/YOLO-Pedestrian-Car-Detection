@@ -352,7 +352,5 @@ Overall, this project demonstrates the effectiveness of **YOLO-based object dete
 
 **Sujan KS**
 
-Artificial Intelligence & Machine Learning
-Deep Learning & Computer Vision Enthusiast
 
 ---
